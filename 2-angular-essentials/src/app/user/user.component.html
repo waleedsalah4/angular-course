@@ -1,0 +1,34 @@
+<app-card>
+  <button [class.active]="selected" (click)="onSelectUser()">
+    <img [src]="imagePath" [alt]="user.name" />
+    <span>{{ user.name }}</span>
+  </button>
+</app-card>
+
+<!-- 
+props with signals
+<div>
+  <button (click)="onSelectUser()">
+    <img [src]="imagePath()" [alt]="name()" />
+    <span>{{ name() }}</span>
+  </button>
+</div> -->
+
+<!-- 
+with normal change mechanism 
+<div>
+  <button (click)="onSelectUser()">
+     property binding
+    <img [src]="imagePath" [alt]="selectedUser.name" />
+    string interpolation 
+    <span>{{ selectedUser.name }}</span>
+  </button>
+</div> -->
+
+<!-- with signals change mechanism -->
+<!-- <div>
+  <button (click)="onSelectUser()">
+    <img [src]="imagePath()" [alt]="selectedUser().name" />
+    <span>{{ selectedUser().name }}</span>
+  </button>
+</div> -->

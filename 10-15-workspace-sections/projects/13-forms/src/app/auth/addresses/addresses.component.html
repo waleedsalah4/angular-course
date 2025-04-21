@@ -1,0 +1,89 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Welcome on board!</h2>
+  <p>We just need a little bit of data from you to get you started 🚀</p>
+
+  <div>
+    <fieldset formArrayName="addresses">
+      <legend>Your Addresses</legend>
+
+      @for (addressCtrl of addresses.controls; track $index) {
+      <div [formGroupName]="$index">
+        <div class="control-row">
+          <div class="control">
+            <label [for]="'street-' + $index">Street</label>
+            <input
+              type="text"
+              [id]="'street-' + $index"
+              formControlName="street"
+            />
+            @if(addressCtrl.get('street')?.invalid &&
+            (addressCtrl.get('street')?.dirty ||
+            addressCtrl.get('street')?.touched)) {
+            <p class="error-text">Street is required</p>
+            }
+          </div>
+
+          <div class="control">
+            <label [for]="'number-' + $index">Number</label>
+            <input
+              type="text"
+              [id]="'number-' + $index"
+              formControlName="number"
+            />
+            @if(addressCtrl.get('number')?.invalid &&
+            (addressCtrl.get('number')?.dirty ||
+            addressCtrl.get('number')?.touched)) {
+            <p class="error-text">Number is required</p>
+            }
+          </div>
+        </div>
+
+        <div class="control-row">
+          <div class="control">
+            <label [for]="'postal-code-' + $index">Postal Code</label>
+            <input
+              type="text"
+              [id]="'postal-code-' + $index"
+              formControlName="postalCode"
+            />
+            @if(addressCtrl.get('postalCode')?.invalid &&
+            (addressCtrl.get('postalCode')?.dirty ||
+            addressCtrl.get('postalCode')?.touched)) {
+            <p class="error-text">Postal Code is required</p>
+            }
+          </div>
+
+          <div class="control">
+            <label [for]="'city-' + $index">City</label>
+            <input type="text" [id]="'city-' + $index" formControlName="city" />
+            @if(addressCtrl.get('city')?.invalid &&
+            (addressCtrl.get('city')?.dirty ||
+            addressCtrl.get('city')?.touched)) {
+            <p class="error-text">City is required</p>
+            }
+          </div>
+        </div>
+
+        @if(addresses.length > 1) {
+        <button type="button" (click)="removeAddress($index)">❌ Remove</button>
+        }
+      </div>
+      }
+
+      <button type="button" (click)="addAddress()">➕ Add Address</button>
+    </fieldset>
+  </div>
+
+  <hr />
+
+  <p class="form-actions">
+    <button type="reset" class="button button-flat" (click)="onReset()">
+      Reset
+    </button>
+    <button type="submit" class="button">Sign up</button>
+  </p>
+
+  @if(form.touched && form.invalid){
+  <p class="control-error">Invalid form - please check your input data.</p>
+  }
+</form>

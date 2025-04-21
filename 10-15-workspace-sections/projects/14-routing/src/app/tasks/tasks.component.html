@@ -1,0 +1,28 @@
+<!-- 
+./
+ link to the page we're currently on, by using this notation.
+That's another special syntax understood by Angular,
+which essentially tells Angular that you wanna stay
+on the page where you are,
+or that you wanna construct a path
+that starts at the current page. 
+-->
+
+<p>
+  <a
+    routerLink="./"
+    [queryParams]="{ order: order() === 'asc' ? 'desc' : 'asc' }"
+  >
+    Sort {{ order() === "asc" ? "Descending" : "Ascending" }}
+  </a>
+</p>
+
+<ul>
+  @for (task of userTasks(); track task.id) {
+  <li>
+    <app-task [task]="task" />
+  </li>
+  } @empty {
+  <p>There are no tasks yet. Start adding some!</p>
+  }
+</ul>
